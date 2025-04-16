@@ -1,0 +1,26 @@
+{
+  "name": "examin-final",
+  "version": "1.0.0",
+  "main": "serveur.js",
+  "scripts": {
+    "start" : "nodemon serveur.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victo-1940381/examin-final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victo-1940381/examin-final/issues"
+  },
+  "homepage": "https://github.com/Victo-1940381/examin-final#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.0",
+    "nodemon": "^3.1.9"
+  }
+}
