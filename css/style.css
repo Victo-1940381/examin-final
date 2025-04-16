@@ -1,0 +1,26 @@
+.grostitre{
+    align-self: center;
+    text-align: center;
+
+}
+.nomtitre{
+    align-self: center;
+    text-align: center;
+}
+.creationuser{
+    display: inline-grid;
+    padding: auto;
+    
+}
+.recupApi{
+    display: inline-grid; 
+   padding: auto;
+}
+.form{
+   display: grid;
+   grid-template-columns: auto auto;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    justify-content: space-evenly;
+}
