@@ -9,18 +9,56 @@
 }
 .creationuser{
     display: inline-grid;
-    padding: auto;
-    
+    padding-right: 50px;
+    margin-left: 20px;
+}
+h4{
+    text-align: center;
 }
 .recupApi{
     display: inline-grid; 
-   padding: auto;
+    padding-left: 50px;
+    margin-right: 20px;
 }
 .form{
    display: grid;
-   grid-template-columns: auto auto;
-    align-items: center;
-    align-content: center;
-    align-self: center;
-    justify-content: space-evenly;
+   grid-template-columns: auto 2px auto;
+   
+}
+.ligne{
+    border-left: 2px solid black;
+   height:100%;
+   
+    
+    
+    top: 0;
+}
+#buttonCreer{
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    float: right; 
+}
+#buttonrecuperer{
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    float: right; 
+}
+#generationapicle{
+    display: inline;
 }

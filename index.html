@@ -9,13 +9,37 @@
     <h1 class="grostitre">Épreuve finale - Service Web H25</h1>
     <p class="nomtitre">Ludovic provost-labbé</p>
     <div class="form">
+
     <div class="creationuser">
         <h4>Création d'un utilisateur</h4>
-        <h4> utilisateur</h4>
+        <p>Prénom</p>
+        <input type="text" name="prenom" id="prenom" placeholder="Votre prénom">
+        <p>Nom</p>
+        <input type="text" name="nom" id="nom" placeholder="Votre nom">
+        <p>Courriel</p>
+        <input type="email" name="courriel" id="courriel" placeholder="Votre courriel">
+        <p>mot de passe</p>
+        <input type="password" name="password" id="password" placeholder="********">
+        <br>
+        <div class="boutton">
+        <button id="buttonCreer">Créer</button>
+        </div>
     </div>
+    <div class="ligne"></div>
     <div class="recupApi">
         <h4>Récuperation cle api</h4>
-        <h4> cle api</h4>
+        <p>Courriel</p>
+        <input type="email" name="courrielapi" id="courrielapi" placeholder="votre courriel">
+        <p>mot de passe</p>
+        <input type="password" name="passapi" id="passapi" placeholder="********">
+        
+        <div>
+            <input type="checkbox" name="generationapicle" id="generationapicle">
+            <label for="generationapicle">Generer une nouvelle clé Api</label>
+        </div>
+        <div>
+        <button id="buttonrecuperer">Récuperer</button>
+    </div>
     </div>
     </div>
 </body>
