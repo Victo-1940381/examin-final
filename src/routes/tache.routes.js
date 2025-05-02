@@ -8,4 +8,5 @@ router.get('/ListeTache/:id',authentification ,tacheControl.listeTache);
 router.get('/DetailTache/:id',authentification,tacheControl.DetailTache);
 router.post('/Tache',authentification,tacheControl.AjoutTache);
 router.put('/Tache',authentification,tacheControl.ModifTache);
+router.put('/Tache/:id',authentification,tacheControl.ModifStatusTache);
 export default router;

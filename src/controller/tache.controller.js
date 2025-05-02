@@ -239,6 +239,37 @@ const ModifTache = async (req,res) => {
     })
     }
 };
+const ModifStatusTache = async (req,res) => {
+    if(!req.params.id ||parseInt(req.params.id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la tache est requis et doit être supérieur à 0"
+        });
+        return;
+    }
+    if(!req.body.complete){
+        res.status(400);
+        res.send({
+            message: "Le status de la tache est requis"
+        });
+        return; 
+    }
+    await tacheModel.modifTacheStatus(req.params.id,req.body.complete)
+    .then((tache)=>{
+        let tacheInfo = {
+            "id":req.params.id,
+            "complete":req.body.complete
+        };
+        let rep = {"message":`la tache [${req.body.titre}] a été modifier avec succes`,
+                "tache":tacheInfo};
+                res.status(200);
+                res.send(rep);
+    })
+    .catch((erreur)=>{
+        res.status(500);
+        res.send({"erreur":`echec lors de la modification de la tache [${req.body.titre}]`});
+    })
+};
 export default {
-listeTache,DetailTache,AjoutTache,ModifTache
+listeTache,DetailTache,AjoutTache,ModifTache,ModifStatusTache
 }

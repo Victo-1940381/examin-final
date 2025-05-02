@@ -101,6 +101,20 @@ const modifTache = (id,id_util,titre,desc,date_debut,date_echeance) => {
     });
     });
 };
+const modifTacheStatus = (id,complete) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'update taches set complete = $2 where id=$1 ';
+        const parametre = [id,complete];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
 export default {
-    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache,ajouttache,modifTache
+    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache,ajouttache,modifTache,modifTacheStatus
 }
