@@ -47,28 +47,32 @@ const getListeTache = (id) => {
 };
 const getDetailTache = (id) => {
     return new Promise((resolve,reject)=>{
-        const requete = 'select * from taches where id = $1';
+        const requete = 'select titre,description,date_debut,date_echeance,complete from taches where id = $1';
         const parametre = [id];
         db.query(requete,parametre,(erreur,resultat)=>{
+            if(erreur){
             console.log('Erreur sqlState : ' + erreur);
             console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
             reject(erreur);
-        });
+            }
         resolve(resultat.rows);
+    });
     });
 };
 const getListeSousTache = (id) => {
     return new Promise((resolve,reject)=>{
-        const requete = 'select * from sous_taches where tache_id = $1';
+        const requete = 'select titre,complete from sous_taches where tache_id = $1';
         const parametre = [id];
         db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
             console.log('Erreur sqlState : ' + erreur);
             console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
             reject(erreur);
-        });
+           }
         resolve(resultat.rows);
     });
-}
+    });
+};
 export default {
     getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache
 }

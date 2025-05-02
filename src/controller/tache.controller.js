@@ -85,7 +85,7 @@ const DetailTache = async (req,res) => {
         res.send({
             message: "Erreur lors de la récupération des detail de la tache avec l'id  " + req.params.id
         });
-    })
+    });
     await tacheModel.getListeSousTache(req.params.id)
     .then((soustache)=>{
         if(!soustache[0]){
