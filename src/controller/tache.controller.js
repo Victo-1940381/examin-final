@@ -57,6 +57,6 @@ else{
 }
 };
 
-export {
+export default {
 listeTache
 }

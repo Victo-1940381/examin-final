@@ -1,5 +1,5 @@
 import { json } from "express";
-import { ValidationCle } from "../models/tache.model";
+import model from "../models/tache.model.js";
 
 const authentification = (req, res, next) => {
     if(!req.headers.authorization) {
@@ -7,7 +7,7 @@ const authentification = (req, res, next) => {
 
     }
     const cleApi = req.headers.authorization.split(' ')[1];
-    ValidationCle(cleApi)
+    model.ValidationCle(cleApi)
     .then(resultat => {
         if(!resultat){
             return res.status(401),json({message:"Clé API invalide"});

@@ -1,9 +1,9 @@
 // À ajuster selon la structure
 import express from 'express';
-import { listeTache } from '../controller/tache.controller.js';
-
+import tacheControl  from '../controller/tache.controller.js';
+import authentification from "../middlewares/authentification.middleware.js" 
 const router = express.Router();
 
-router.get('/ListeTache/:id', listeTache);
+router.get('/ListeTache/:id',authentification ,tacheControl.listeTache);
 
 export default router;
