@@ -1,3 +1,4 @@
+import { modif } from "../../../ex-06/src/controller/pokemon.controller.js";
 import tacheModel from "../models/tache.model.js";
 import url from 'url';
 const listeTache = async (req,res) => {
@@ -106,6 +107,138 @@ const DetailTache = async (req,res) => {
         });
     });
 };
+const AjoutTache = async (req,res) => {
+    let erreur = false;
+    let manquant = [];
+    if(parseInt(req.body.utilisateur_id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de l'utilisateur doit être supérieur à 0"
+        });
+        return;
+    }
+    if(!req.body.utilisateur_id ||!req.body.titre || !req.body.description ||!req.body.date_debut || !req.body.date_echeance || !req.body.complete) {
+        erreur = true;
+    }
+    if(erreur){
+    if(!req.body.utilisateur_id) {
+       manquant.push("utilisateur_id");
+    }
+    if(!req.body.titre){
+       manquant.push("Titre");
+    }
+    if(!req.body.description){
+       manquant.push("description");
+    }
+    if(!req.body.date_debut){
+       manquant.push("date_debut");
+    }
+    if(!req.body.date_echeance){
+      manquant.push("date_echeance");
+    }
+    if(!req.body.complete){
+        manquant.push("complete");
+    }
+    let messageerreur = {"erreur":"le format des donnée est invalide",
+        "champs manquant": manquant
+    };
+    res.status(400);
+    res.send(messageerreur);
+    return;
+    }
+    else{
+       await tacheModel.ajouttache(req.body.utilisateur_id,req.body.titre,req.body.description,req.body.date_debut,req.body.date_echeance,req.body.complete)
+        .then((tache)=>{
+            let tacheInfo = {
+                "id":tache.insertId,
+                "utilisateur_id":req.body.utilisateur_id,
+                "titre":req.body.titre,
+                "description":req.body.description,
+                "date_debut":req.body.date_debut,
+                "date_echeance":req.body.date_echeance,
+                "complete":req.body.complete
+            };
+            let rep = {"message":`la tache [${req.body.titre}] a été ajouter avec succes`,
+                    "tache":tacheInfo};
+                    res.status(200);
+                    res.send(rep);
+        })
+        .catch((erreur)=>{
+            res.status(500);
+            res.send({"erreur":`echec lors de la creation de la tache [${req.body.titre}]`});
+        })
+    }
+};
+const ModifTache = async (req,res) => {
+    let erreur = false;
+    let manquant = [];
+    if(parseInt(req.body.utilisateur_id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de l'utilisateur doit être supérieur à 0"
+        });
+        return;
+    }
+    if(parseInt(req.body.id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la tache doit être supérieur à 0"
+        });
+        return;
+    }
+    if(!req.body.utilisateur_id ||!req.body.titre || !req.body.description ||!req.body.date_debut || !req.body.date_echeance || !req.body.id) {
+        erreur = true;
+    }
+    if(erreur){ 
+        
+    if(!req.body.id){
+        manquant.push("id");
+    }
+    if(!req.body.utilisateur_id) {
+       manquant.push("utilisateur_id");
+    }
+    if(!req.body.titre){
+       manquant.push("Titre");
+    }
+    if(!req.body.description){
+       manquant.push("description");
+    }
+    if(!req.body.date_debut){
+       manquant.push("date_debut");
+    }
+    if(!req.body.date_echeance){
+      manquant.push("date_echeance");
+    }
+   
+    let messageerreur = {"erreur":"le format des donnée est invalide",
+        "champs manquant": manquant
+    };
+    res.status(400);
+    res.send(messageerreur);
+    return;
+    }
+    else{
+       await tacheModel.modifTache(req.body.id,req.body.utilisateur_id,req.body.titre,req.body.description,req.body.date_debut,req.body.date_echeance) 
+       .then((tache)=>{
+        let tacheInfo = {
+            "id":req.body.id,
+            "utilisateur_id":req.body.utilisateur_id,
+            "titre":req.body.titre,
+            "description":req.body.description,
+            "date_debut":req.body.date_debut,
+            "date_echeance":req.body.date_echeance
+        };
+        let rep = {"message":`la tache [${req.body.titre}] a été modifier avec succes`,
+                "tache":tacheInfo};
+                res.status(200);
+                res.send(rep);
+    })
+    .catch((erreur)=>{
+        res.status(500);
+        res.send({"erreur":`echec lors de la modification de la tache [${req.body.titre}]`});
+    })
+    }
+};
 export default {
-listeTache,DetailTache
+listeTache,DetailTache,AjoutTache,ModifTache
 }

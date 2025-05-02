@@ -73,6 +73,34 @@ const getListeSousTache = (id) => {
     });
     });
 };
+const ajouttache = (id_util,titre,desc,date_debut,date_echeance,complete) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'insert into taches(utilisateur_id,titre,description,date_debut,date_echeance,complete) values($1,$2,$3,$4,$5,$6)';
+        const parametre = [id_util,titre,desc,date_debut,date_echeance,complete];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
+const modifTache = (id,id_util,titre,desc,date_debut,date_echeance) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'update taches set utilisateur_id = $2, titre =$3,description = $4,date_debut =$5,date_echeance=$6 where id=$1 ';
+        const parametre = [id,id_util,titre,desc,date_debut,date_echeance];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
 export default {
-    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache
+    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache,ajouttache,modifTache
 }
