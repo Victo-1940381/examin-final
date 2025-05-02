@@ -30,6 +30,21 @@ const getListeTacheIncomplete = (id) => {
         });
     });
 };
+const getListeTache = (id) => {
+    return new Promise((resolve,reject)=> {
+        const requete = 'select titre,description,date_debut,date_echeance,complete from taches where  utilisateur_id = $1';
+        const parametres = [id];
+        db.query(requete,parametres,(erreur,resultat)=> {
+            if (erreur){
+                console.log('Erreur sqlState : ' + erreur);
+                console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+                reject(erreur);
+            }
+
+            resolve(resultat.rows);
+        });
+    });
+};
 export default {
-    getListeTacheIncomplete,ValidationCle
+    getListeTacheIncomplete,ValidationCle,getListeTache
 }

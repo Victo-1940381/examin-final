@@ -1,13 +1,10 @@
 import tacheModel from "../models/tache.model.js";
+import url from 'url';
 const listeTache = async (req,res) => {
     let afficher = false;
-if(req.params.tous != true){
-    res.status(400);
-    res.send({message: "le parametre tous doit etre true ou false"});
-    return;
-}
-else if (req.params.tous == true){
-  afficher = true;   
+
+ if (req.query.tous){
+  afficher = true; 
 }
 if(!req.params.id || parseInt(req.params.id) <= 0){
     res.status(400);
@@ -38,7 +35,25 @@ if (afficher == false){
     });
 }
 else{
+    await tacheModel.getListeTache(req.params.id)
+    .then((tache) => {
+        if(!tache[0]){
+            res.status(404);
+            res.send({
+                message: `taches introuvable avec l'id utilisateur ${req.params.id}`
+            });
+            return;
+        }
+       res.send(tache);
+    })
+    .catch((erreur)=>{
+        console.log('Erreur : ', erreur);
+        res.status(500)
+        res.send({
+            message: "Erreur lors de la récupération des taches avec l'id utilisateur " + req.params.id
+        });
 
+    });
 }
 };
 
