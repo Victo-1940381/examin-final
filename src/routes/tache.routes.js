@@ -5,5 +5,5 @@ import authentification from "../middlewares/authentification.middleware.js"
 const router = express.Router();
 
 router.get('/ListeTache/:id',authentification ,tacheControl.listeTache);
-
+router.get('/DetailTache/:id',authentification,tacheControl.DetailTache);
 export default router;

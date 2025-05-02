@@ -23,6 +23,7 @@ if (afficher == false){
             });
             return;
         }
+        res.status(200);
        res.send(tache);
     })
     .catch((erreur)=>{
@@ -44,7 +45,8 @@ else{
             });
             return;
         }
-       res.send(tache);
+        res.status(200);
+        res.send(tache);
     })
     .catch((erreur)=>{
         console.log('Erreur : ', erreur);
@@ -56,7 +58,54 @@ else{
     });
 }
 };
+const DetailTache = async (req,res) => {
+   let tached;
+    if(!req.params.id || parseInt(req.params.id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la tache est obligatoire et doit être supérieur à 0"
+        });
+        return;
+    }
+    await tacheModel.getDetailTache(req.params.id)
+    .then((tache) => {
+        if(!tache[0]){
+            res.status(404);
+            res.send({
+                message: `tache introuvable avec l'id  ${req.params.id}`
+            });
+            return;
+        }
+        tached = tache;
 
+    })
+    .catch((erreur)=>{
+        console.log('Erreur : ', erreur);
+        res.status(500)
+        res.send({
+            message: "Erreur lors de la récupération des detail de la tache avec l'id  " + req.params.id
+        });
+    })
+    await tacheModel.getListeSousTache(req.params.id)
+    .then((soustache)=>{
+        if(!soustache[0]){
+            res.status(404);
+            res.send({
+                message: `sous-taches introuvable avec l'id tache  ${req.params.id}`
+            });
+            return;
+        }
+        res.status(200);
+        res.send({"Tache": tached, "Sous-Tache": soustache});
+    })
+    .catch((erreur)=>{
+        console.log('Erreur : ', erreur);
+        res.status(500)
+        res.send({
+            message: "Erreur lors de la récupération des sous-tache de la tache avec l'id  " + req.params.id
+        });
+    });
+};
 export default {
-listeTache
+listeTache,DetailTache
 }
