@@ -612,6 +612,132 @@ const ajoutUtilisateur = async  (req,res) => {
 }
 
 };
+const recupCleApi = async (req,res) => {
+let erreur =false;
+let manquant = [];
+let newapi = false;
+if(!req.body.courriel || !req.body.password){
+    erreur =true;
+}
+if(req.query.genererapi){
+    newapi = true;
+}
+if(erreur){
+    if(!req.body.courriel){
+        manquant.push("Courriel");
+    }
+    if(!req.body.password){
+        manquant.push("mot de passe");
+    }
+    let messageerreur = {"erreur":"le format des donnée est invalide",
+        "champs manquant": manquant
+    };
+    res.status(400);
+    res.send(messageerreur);
+    return;
+}
+else if(!req.body.courriel.includes("@")){
+    res.status(400);
+    res.send({"erreur":"le courriel doit contenir un @"});
+    return;
+}
+else{
+  let passhash;
+  let hash;
+    let passvalide = false;
+    await tacheModel.validerPass(req.body.courriel)
+    .then((api)=>{
+        if(!api[0]){
+            res.status(404);
+            res.send({
+                "erreur":"aucun utilisateur trouver avec le courriel: " + req.body.courriel
+            });
+            return;
+        }
+        console.log(api[0].password);
+        console.log(req.body.password);
+   
+        hash = api[0].password;
+       
+        
+
+
+    })
+    .catch((erreur)=>{
+        res.status(500);
+        res.send({"erreur":`echec lors de la validation du mot de passe`});
+        return;
+    })
+   passhash = await bcrypt.compare(req.body.password,hash);
+   if(passhash){
+    passvalide = true;
+   }
+   else{
+    res.status(404);
+    res.send({"erreur":"mot de passe invalide"});
+   }
+    if(passvalide){
+        if(newapi == false){
+        await tacheModel.getCleApi(req.body.courriel)
+        .then((cleapi)=>{
+            if(!cleapi[0]){
+                res.status(404);
+                res.send({
+                    "erreur":"aucun clé api trouver avec le courriel: " + req.body.courriel
+                });
+                return;
+            }
+           res.status(200);
+           res.send({
+            "cle api": cleapi
+           });
+           return;
+    
+    
+        })
+        .catch((erreur)=>{
+            res.status(500);
+            res.send({"erreur":`echec lors de la recuperation de la cle api`});
+            return;
+        })
+        }else if (newapi == true){
+    
+        let valide = false;
+        let api;
+        while (valide != true){
+            api = genererCleApi();
+            
+           await tacheModel.ValidationCle(api)
+            .then(resultat => {
+                    if(!resultat[0]){
+                        valide = true;
+                    }
+                })
+             }
+        await tacheModel.newCleApi(req.body.courriel,api)
+        .then((cleapi)=>{
+         
+           res.status(200);
+           res.send({
+            "cle api": api
+           });
+           return;
+    
+    
+        })
+        .catch((erreur)=>{
+            res.status(500);
+            res.send({"erreur":`echec lors de la generation de l'api`});
+            return;
+        })
+    }
+        }
+}
+
+
+};
 export default {
-listeTache,DetailTache,AjoutTache,ModifTache,ModifStatusTache,supprimerTache,AjoutSousTache,ModifSousTache,ModifStatusSousTache,supprimerSousTache,ajoutUtilisateur
+listeTache,DetailTache,AjoutTache,ModifTache,ModifStatusTache,
+supprimerTache,AjoutSousTache,ModifSousTache,ModifStatusSousTache,
+supprimerSousTache,ajoutUtilisateur,recupCleApi
 }

@@ -214,6 +214,53 @@ const ajoutUtilisateur = (nom,prenom,courriel,cle_api,password) => {
         });
     });
 };
+const getCleApi = (courriel)=>{
+    return new Promise((resolve,reject)=>{
+        const requete = 'select cle_api from utilisateur where courriel = $1';
+        const parameters = [courriel];
+
+        db.query(requete,parameters,(erreur,resultat)=>{
+            if(erreur){
+                console.log('Erreur sqlState : ' + erreur);
+                console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+                reject(erreur);
+               }
+            resolve(resultat.rows);
+        });
+    });
+};
+const validerPass = (courriel)=>{
+    return new Promise((resolve,reject)=>{
+        const requete = 'select password from utilisateur where courriel = $1';
+        const parameters = [courriel];
+
+        db.query(requete,parameters,(erreur,resultat)=>{
+            if(erreur){
+                console.log('Erreur sqlState : ' + erreur);
+                console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+                reject(erreur);
+               }
+            resolve(resultat.rows);
+        });
+    });
+};
+const newCleApi = (courriel,cle_api)=>{
+    return new Promise((resolve,reject)=>{
+        const requete = 'update utilisateur set cle_api=$2 where courriel = $1';
+        const parameters = [courriel,cle_api];
+
+        db.query(requete,parameters,(erreur,resultat)=>{
+            if(erreur){
+                console.log('Erreur sqlState : ' + erreur);
+                console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+                reject(erreur);
+               }
+            resolve(resultat.rows);
+        });
+    });
+}
 export default {
-    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache,ajouttache,modifTache,modifTacheStatus,supprimerTache,ajoutsoustache,modifSousTache,modifSousTacheStatus,supprimerSousTache,getDetailSousTache,ajoutUtilisateur
+    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache,ajouttache,modifTache,
+    modifTacheStatus,supprimerTache,ajoutsoustache,modifSousTache,modifSousTacheStatus,supprimerSousTache,getDetailSousTache,
+    ajoutUtilisateur,getCleApi,validerPass,newCleApi
 }
