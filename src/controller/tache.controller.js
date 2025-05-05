@@ -1,6 +1,21 @@
 import { modif } from "../../../ex-06/src/controller/pokemon.controller.js";
 import tacheModel from "../models/tache.model.js";
 import url from 'url';
+import bcrypt from 'bcrypt';
+function genererCleApi() {
+    let cle ="";
+    let nombrerand;
+ const tableau = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+    'M', 'N', 'O', 'P', 'Q', 'R',  'S', 'T', 'U', 'V', 'W', 'X',
+    'Y', 'Z' ,'0','1','2','3','4','5','6','7','8','9'];
+for (let i =0;i<5;i++){
+   nombrerand=Math.floor(Math.random()* tableau.length);
+   cle = cle + tableau[nombrerand];
+
+}
+
+return cle;
+}
 const listeTache = async (req,res) => {
     let afficher = false;
 
@@ -523,6 +538,69 @@ const supprimerSousTache = async (req,res) => {
         }); 
     
     };
+const ajoutUtilisateur = async  (req,res) => {
+    let erreur = false;
+    let manquant = [];
+    let courriel = req.body.courriel;
+    if(!req.body.nom || !req.body.prenom || !req.body.courriel || !req.body.password){
+        erreur = true;
+    }
+    if(erreur){
+        if(!req.body.nom){
+            manquant.push("nom");
+        }
+        if(!req.body.prenom){
+            manquant.push("prenom");
+        }
+        if(!req.body.courriel){
+            manquant.push("courriel");
+        }
+        if(!req.body.password){
+            manquant.push("mot de passe");
+        }
+        let messageerreur = {"erreur":"le format des donnée est invalide",
+            "champs manquant": manquant
+        };
+        res.status(400);
+        res.send(messageerreur);
+        return;
+    }
+    else if(!courriel.includes("@")){
+        res.status(400);
+        res.send({"erreur":"le courriel doit contenir un @"});
+        return;
+    }
+    else{
+        let valide =false;
+        let cleApi;
+        let passhach;
+        const costFactor =10;
+        while (valide != true){
+        cleApi = genererCleApi();
+       await tacheModel.ValidationCle(cleApi)
+        .then(resultat => {
+                if(!resultat){
+                    valide = true;
+                }
+            })
+         }
+       passhach = await bcrypt.hash(req.body.password, costFactor)
+      
+
+    await tacheModel.ajoutUtilisateur(req.body.nom,req.body.prenom,req.body.courriel,passhach,cleApi)
+    .then((user)=>{
+        let rep = {"message":`l'utilisateur' [${req.body.prenom}] a été ajouter avec succes`,
+                "cle_api":cleApi};
+                res.status(200);
+                res.send(rep);
+    })
+    .catch((erreur)=>{
+        res.status(500);
+        res.send({"erreur":`echec lors de la creation de l'utilisateur [${req.body.prenom}]`});
+    })
+}
+
+};
 export default {
-listeTache,DetailTache,AjoutTache,ModifTache,ModifStatusTache,supprimerTache,AjoutSousTache,ModifSousTache,ModifStatusSousTache,supprimerSousTache
+listeTache,DetailTache,AjoutTache,ModifTache,ModifStatusTache,supprimerTache,AjoutSousTache,ModifSousTache,ModifStatusSousTache,supprimerSousTache,ajoutUtilisateur
 }

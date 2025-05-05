@@ -14,4 +14,5 @@ router.post('/SousTache',authentification,tacheControl.AjoutSousTache);
 router.put('/SousTache',authentification,tacheControl.ModifSousTache);
 router.put('/SousTache/:id',authentification,tacheControl.ModifStatusSousTache);
 router.delete('/SousTache/:id',authentification,tacheControl.supprimerSousTache);
+router.post('/Utilisateur',tacheControl.ajoutUtilisateur);
 export default router;

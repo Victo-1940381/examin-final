@@ -7,18 +7,19 @@ const authentification = (req, res, next) => {
 
     }
     const cleApi = req.headers.authorization.split(' ')[1];
-    model.ValidationCle(cleApi)
-    .then(resultat => {
-        if(!resultat){
-            return res.status(401),json({message:"Clé API invalide"});
-        
-        } else {
-            next();
-        }
-    })
-    .catch(erreur => {
-        return res.status(500).json({message: "Erreur lors de la validation de la clé api"});
-    });
+   model.ValidationCle(cleApi)
+   .then((validation)=>{
+    if(!validation[0]){
+        return res.status(401).json({ message: "Clé API invalide" });
+    }
+    else{
+        next();
+    }
+   })
+   .catch(erreur => {
+    return res.status(500).json({ message: "Erreur lors de la validation de la clé api" })
+}); 
+    
 }
 
 export default authentification;

@@ -2,7 +2,7 @@ import db from '../config/bd.js';
 
 const ValidationCle = (cleApi) => {
     return new Promise((resolve,reject)=> {
-        const requete = 'select * from utilisateur where cle_api = $1';
+        const requete = 'select id from utilisateur where cle_api = $1';
         const parameters = [cleApi];
         db.query(requete,parameters,(erreur,resultat)=>{
             if(erreur){
