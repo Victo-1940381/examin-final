@@ -115,6 +115,105 @@ const modifTacheStatus = (id,complete) => {
     });
     });
 };
+const supprimerTache = (id) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'delete from taches where id=$1 ';
+        const parametre = [id];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
+const ajoutsoustache = (tache_id,titre,complete) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'insert into sous_taches(tache_id,titre,complete) values($1,$2,$3)';
+        const parametre = [tache_id,titre,complete];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
+const modifSousTache = (id,tache_id,titre) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'update sous_taches set tache_id=$2,titre=$3 where id=$1 ';
+        const parametre = [id,tache_id,titre];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
+const modifSousTacheStatus = (id,complete) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'update sous_taches set complete = $2 where id=$1 ';
+        const parametre = [id,complete];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
+const supprimerSousTache = (id) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'delete from sous_taches where id=$1 ';
+        const parametre = [id];
+        db.query(requete,parametre,(erreur,resultat)=>{
+           if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+           }
+        resolve(resultat.rows);
+    });
+    });
+};
+const getDetailSousTache = (id) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'select tache_id,titre,complete from sous_taches where id = $1';
+        const parametre = [id];
+        db.query(requete,parametre,(erreur,resultat)=>{
+            if(erreur){
+            console.log('Erreur sqlState : ' + erreur);
+            console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+            reject(erreur);
+            }
+        resolve(resultat.rows);
+    });
+    });
+};
+const ajoutUtilisateur = (nom,prenom,courriel,password,cle_api) => {
+    return new Promise((resolve,reject)=>{
+        const requete = 'insert into utilisateur(nom,prenom,courriel,cle_api,password) values($1,$2,$3,$4,$5)';
+        const parameters = [nom,prenom,courriel,password,cle_api];
+
+        db.query(requete,parameters,(erreur,resultat)=>{
+            if(erreur){
+                console.log('Erreur sqlState : ' + erreur);
+                console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
+                reject(erreur);
+               }
+            resolve(resultat.rows);
+        });
+    });
+};
 export default {
-    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache,ajouttache,modifTache,modifTacheStatus
+    getListeTacheIncomplete,ValidationCle,getListeTache,getDetailTache,getListeSousTache,ajouttache,modifTache,modifTacheStatus,supprimerTache,ajoutsoustache,modifSousTache,modifSousTacheStatus,supprimerSousTache,getDetailSousTache,ajoutUtilisateur
 }

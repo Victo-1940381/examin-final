@@ -260,16 +260,269 @@ const ModifStatusTache = async (req,res) => {
             "id":req.params.id,
             "complete":req.body.complete
         };
-        let rep = {"message":`la tache [${req.body.titre}] a été modifier avec succes`,
+        let rep = {"message":`la tache [${req.params.id}] a été modifier avec succes`,
                 "tache":tacheInfo};
                 res.status(200);
                 res.send(rep);
     })
     .catch((erreur)=>{
         res.status(500);
-        res.send({"erreur":`echec lors de la modification de la tache [${req.body.titre}]`});
+        res.send({"erreur":`echec lors de la modification de la tache [${req.params.id}]`});
     })
 };
+const supprimerTache = async (req,res) => {
+let trouver = false;
+let tacheInfo;
+if(!req.params.id ||parseInt(req.params.id) <= 0){
+    res.status(400);
+    res.send({
+        message: "L'id de la tache est requis et doit être supérieur à 0"
+    });
+    return;
+}
+await tacheModel.getDetailTache(req.params.id)
+.then((tache)=>{
+    if(!tache[0]){
+        res.status(404);
+        res.send({
+            message: `tache introuvable avec l'id  ${req.params.id}`
+        });
+        return;
+    }
+    trouver = true;
+    tacheInfo = tache;
+})
+.catch((erreur)=>{
+    console.log('Erreur : ', erreur);
+    res.status(500)
+    res.send({
+        message: "Erreur lors de la récupération des detail de la tache avec l'id  " + req.params.id
+    });
+
+});
+
+await tacheModel.supprimerTache(req.params.id)
+    .then((suppr)=>{
+       if(!trouver){
+        res.status(404)
+        res.send({"erreur":`la tache [${req.params["id"]}] n'existe pas dans la base de données`});
+        return;
+       }
+       else{
+        let rep = {"message": `la tache ${req.params.id} a ete supprimer avec success`,
+        "tache":tacheInfo};
+        res.status(200);
+        res.send(rep);
+       }
+
+    })
+    .catch((erreur)=>{
+        console.log('Erreur : ', erreur);
+        res.status(500)
+        res.send({
+            message: "Erreur lors de la suppresion de la tache   " + req.params.id
+        });
+    
+    }); 
+
+};
+
+const AjoutSousTache = async (req,res) => {
+    let erreur = false;
+    let manquant = [];
+    if(parseInt(req.body.tache_id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la tache doit être supérieur à 0"
+        });
+        return;
+    }
+    if(!req.body.tache_id ||!req.body.titre || !req.body.complete) {
+        erreur = true;
+    }
+    if(erreur){
+    if(!req.body.tache_id) {
+       manquant.push("tache_id");
+    }
+    if(!req.body.titre){
+       manquant.push("Titre");
+    }
+    if(!req.body.complete){
+        manquant.push("complete");
+    }
+    let messageerreur = {"erreur":"le format des donnée est invalide",
+        "champs manquant": manquant
+    };
+    res.status(400);
+    res.send(messageerreur);
+    return;
+    }
+    else{
+       await tacheModel.ajoutsoustache(req.body.tache_id,req.body.titre,req.body.complete)
+        .then((soustache)=>{
+            let soustacheInfo = {
+                "id":soustache.insertId,
+                "tache_id":req.body.tache_id,
+                "titre":req.body.titre,
+                "complete":req.body.complete
+            };
+            let rep = {"message":`la sous-tache [${req.body.titre}] a été ajouter avec succes`,
+                    "tache":soustacheInfo};
+                    res.status(200);
+                    res.send(rep);
+        })
+        .catch((erreur)=>{
+            res.status(500);
+            res.send({"erreur":`echec lors de la creation de la sous-tache [${req.body.titre}]`});
+        })
+    }
+};
+const ModifSousTache = async (req,res) => {
+    let erreur = false;
+    let manquant = [];
+    if(parseInt(req.body.tache_id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la tache doit être supérieur à 0"
+        });
+        return;
+    }
+    if(parseInt(req.body.id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la sous-tache doit être supérieur à 0"
+        });
+        return;
+    }
+    if(!req.body.tache_id ||!req.body.titre  || !req.body.id) {
+        erreur = true;
+    }
+    if(erreur){ 
+        
+    if(!req.body.id){
+        manquant.push("id");
+    }
+    if(!req.body.tache_id) {
+       manquant.push("tache_id");
+    }
+    if(!req.body.titre){
+       manquant.push("Titre");
+    }
+
+   
+    let messageerreur = {"erreur":"le format des donnée est invalide",
+        "champs manquant": manquant
+    };
+    res.status(400);
+    res.send(messageerreur);
+    return;
+    }
+    else{
+       await tacheModel.modifSousTache(req.body.id,req.body.tache_id,req.body.titre) 
+       .then((soustache)=>{
+        let soustacheInfo = {
+            "id":req.body.id,
+            "tache_id":req.body.tache_id,
+            "titre":req.body.titre
+        };
+        let rep = {"message":`la sous-tache [${req.body.titre}] a été modifier avec succes`,
+                "tache":soustacheInfo};
+                res.status(200);
+                res.send(rep);
+    })
+    .catch((erreur)=>{
+        res.status(500);
+        res.send({"erreur":`echec lors de la modification de la sous-tache [${req.body.titre}]`});
+    })
+    }
+};
+const ModifStatusSousTache = async (req,res) => {
+    if(!req.params.id ||parseInt(req.params.id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la sous-tache est requis et doit être supérieur à 0"
+        });
+        return;
+    }
+    if(!req.body.complete){
+        res.status(400);
+        res.send({
+            message: "Le status de la sous-tache est requis"
+        });
+        return; 
+    }
+    await tacheModel.modifSousTacheStatus(req.params.id,req.body.complete)
+    .then((soustache)=>{
+        let soustacheInfo = {
+            "id":req.params.id,
+            "complete":req.body.complete
+        };
+        let rep = {"message":`la sous-tache [${req.params.id}] a été modifier avec succes`,
+                "tache":soustacheInfo};
+                res.status(200);
+                res.send(rep);
+    })
+    .catch((erreur)=>{
+        res.status(500);
+        res.send({"erreur":`echec lors de la modification de la sous-tache [${req.params.id}]`});
+    })
+};
+const supprimerSousTache = async (req,res) => {
+    let trouver = false;
+    let soustacheInfo;
+    if(!req.params.id ||parseInt(req.params.id) <= 0){
+        res.status(400);
+        res.send({
+            message: "L'id de la sous-tache est requis et doit être supérieur à 0"
+        });
+        return;
+    }
+    await tacheModel.getDetailSousTache(req.params.id)
+    .then((soustache)=>{
+        if(!soustache[0]){
+            res.status(404);
+            res.send({
+                message: `sous-tache introuvable avec l'id  ${req.params.id}`
+            });
+            return;
+        }
+        trouver = true;
+        soustacheInfo = soustache;
+    })
+    .catch((erreur)=>{
+        console.log('Erreur : ', erreur);
+        res.status(500)
+        res.send({
+            message: "Erreur lors de la récupération des detail de la sous-tache avec l'id  " + req.params.id
+        });
+    
+    });
+    
+    await tacheModel.supprimerSousTache(req.params.id)
+        .then((suppr)=>{
+           if(!trouver){
+            res.status(404)
+            res.send({"erreur":`la sous-tache [${req.params["id"]}] n'existe pas dans la base de données`});
+            return;
+           }
+           else{
+            let rep = {"message": `la sous-tache ${req.params.id} a ete supprimer avec success`,
+            "tache":soustacheInfo};
+            res.status(200);
+            res.send(rep);
+           }
+    
+        })
+        .catch((erreur)=>{
+            console.log('Erreur : ', erreur);
+            res.status(500)
+            res.send({
+                message: "Erreur lors de la suppresion de la sous-tache   " + req.params.id
+            });
+        
+        }); 
+    
+    };
 export default {
-listeTache,DetailTache,AjoutTache,ModifTache,ModifStatusTache
+listeTache,DetailTache,AjoutTache,ModifTache,ModifStatusTache,supprimerTache,AjoutSousTache,ModifSousTache,ModifStatusSousTache,supprimerSousTache
 }
