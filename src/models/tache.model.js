@@ -199,10 +199,10 @@ const getDetailSousTache = (id) => {
     });
     });
 };
-const ajoutUtilisateur = (nom,prenom,courriel,password,cle_api) => {
+const ajoutUtilisateur = (nom,prenom,courriel,cle_api,password) => {
     return new Promise((resolve,reject)=>{
         const requete = 'insert into utilisateur(nom,prenom,courriel,cle_api,password) values($1,$2,$3,$4,$5)';
-        const parameters = [nom,prenom,courriel,password,cle_api];
+        const parameters = [nom,prenom,courriel,cle_api,password];
 
         db.query(requete,parameters,(erreur,resultat)=>{
             if(erreur){

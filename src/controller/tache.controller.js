@@ -8,7 +8,7 @@ function genererCleApi() {
  const tableau = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
     'M', 'N', 'O', 'P', 'Q', 'R',  'S', 'T', 'U', 'V', 'W', 'X',
     'Y', 'Z' ,'0','1','2','3','4','5','6','7','8','9'];
-for (let i =0;i<5;i++){
+for (let i =0;i<30;i++){
    nombrerand=Math.floor(Math.random()* tableau.length);
    cle = cle + tableau[nombrerand];
 
@@ -570,6 +570,16 @@ const ajoutUtilisateur = async  (req,res) => {
         res.send({"erreur":"le courriel doit contenir un @"});
         return;
     }
+    else if(req.body.nom >30){
+        res.status(400);
+        res.send({"erreur":"le nom est trop long = 30 charactere max"});
+        return;
+    }
+    else if(req.body.prenom >30){
+        res.status(400);
+        res.send({"erreur":"le prenom est trop long = 30 charactere max"});
+        return;
+    }
     else{
         let valide =false;
         let cleApi;
@@ -577,17 +587,18 @@ const ajoutUtilisateur = async  (req,res) => {
         const costFactor =10;
         while (valide != true){
         cleApi = genererCleApi();
+        
        await tacheModel.ValidationCle(cleApi)
         .then(resultat => {
-                if(!resultat){
+                if(!resultat[0]){
                     valide = true;
                 }
             })
          }
-       passhach = await bcrypt.hash(req.body.password, costFactor)
-      
-
-    await tacheModel.ajoutUtilisateur(req.body.nom,req.body.prenom,req.body.courriel,passhach,cleApi)
+       passhach = await bcrypt.hash(req.body.password, costFactor);
+      console.log(cleApi,req.body.nom,req.body.prenom);
+         console.log(cleApi.length);
+    await tacheModel.ajoutUtilisateur(req.body.nom,req.body.prenom,req.body.courriel,cleApi,passhach)
     .then((user)=>{
         let rep = {"message":`l'utilisateur' [${req.body.prenom}] a été ajouter avec succes`,
                 "cle_api":cleApi};
