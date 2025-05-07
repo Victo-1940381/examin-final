@@ -6,7 +6,7 @@ import path from 'path';
 import { error } from 'console';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
-const swaggerDocument = JSON.parse(fs.readFileSync('./src/config/documentation.json', 'utf8'));
+const swaggerDocument = JSON.parse(fs.readFileSync('./src/config/Documentation.json', 'utf8'));
 
 const swaggerOptions = {
     customCss: '.swagger-ui .topbar { display: none }',
