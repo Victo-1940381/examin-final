@@ -1,4 +1,4 @@
-import { modif } from "../../../ex-06/src/controller/pokemon.controller.js";
+
 import tacheModel from "../models/tache.model.js";
 import url from 'url';
 import bcrypt from 'bcrypt';
