@@ -1,24 +1,30 @@
 
 
 function creeruser(){
-prenom =document.getElementById('prenom').value;
-nom = document.getElementById('nom').value;
-courriel = document.getElementById('courriel').value;
-pass = document.getElementById('password').value;
-let user = {
-    prenom: prenom,
-    nom:nom,
-    courriel:courriel,
-    password:pass
-};
-let reponce = await fetch('http://localhost:3000/Utilisateur', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(user)
-});
+let prenom =document.getElementById('prenom').value;
+let nom = document.getElementById('nom').value;
+let courriel = document.getElementById('courriel').value;
+ let pass = document.getElementById('password').value;
+const url = "http://localhost:3000/Utilisateur";
 
-let resultat = await reponce.json();
+ fetch(url, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json;charset=utf-8"
+    },
+    body: JSON.stringify({
+        nom:nom,
+        prenom:prenom,
+        courriel:courriel,
+        password:pass
+    })
+})
+.then(response => response.json())
+.then(data => {
+    alert(`${data.message} cle Api: ${data.cle_api}`);
+})
+.catch(error => console.error(error));
+
 
 }
+//document.getElementById("buttonCreer").onclick = creeruser();

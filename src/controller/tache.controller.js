@@ -596,8 +596,7 @@ const ajoutUtilisateur = async  (req,res) => {
             })
          }
        passhach = await bcrypt.hash(req.body.password, costFactor);
-      console.log(cleApi,req.body.nom,req.body.prenom);
-         console.log(cleApi.length);
+  
     await tacheModel.ajoutUtilisateur(req.body.nom,req.body.prenom,req.body.courriel,cleApi,passhach)
     .then((user)=>{
         let rep = {"message":`l'utilisateur' [${req.body.prenom}] a été ajouter avec succes`,
@@ -654,8 +653,7 @@ else{
             });
             return;
         }
-        console.log(api[0].password);
-        console.log(req.body.password);
+      
    
         hash = api[0].password;
        

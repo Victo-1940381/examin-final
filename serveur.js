@@ -4,7 +4,9 @@ import morgan  from 'morgan';
 import fs from 'fs';
 import path from 'path';
 import { error } from 'console';
+import cors from 'cors';
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev", {
     skip: function (req, res ) { return res.statusCode !=500},
