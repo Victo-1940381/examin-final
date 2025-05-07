@@ -615,27 +615,27 @@ const recupCleApi = async (req,res) => {
 let erreur =false;
 let manquant = [];
 let newapi = false;
-if(!req.body.courriel || !req.body.password){
+if(!req.query.courriel || !req.query.password){
     erreur =true;
 }
 if(req.query.genererapi){
     newapi = true;
 }
 if(erreur){
-    if(!req.body.courriel){
+    if(!req.query.courriel){
         manquant.push("Courriel");
     }
-    if(!req.body.password){
+    if(!req.query.password){
         manquant.push("mot de passe");
     }
     let messageerreur = {"erreur":"le format des donnée est invalide",
-        "champs manquant": manquant
+        "champs_manquant": manquant
     };
     res.status(400);
     res.send(messageerreur);
     return;
 }
-else if(!req.body.courriel.includes("@")){
+else if(!req.query.courriel.includes("@")){
     res.status(400);
     res.send({"erreur":"le courriel doit contenir un @"});
     return;
@@ -644,7 +644,7 @@ else{
   let passhash;
   let hash;
     let passvalide = false;
-    await tacheModel.validerPass(req.body.courriel)
+    await tacheModel.validerPass(req.query.courriel)
     .then((api)=>{
         if(!api[0]){
             res.status(404);
@@ -666,7 +666,7 @@ else{
         res.send({"erreur":`echec lors de la validation du mot de passe`});
         return;
     })
-   passhash = await bcrypt.compare(req.body.password,hash);
+   passhash = await bcrypt.compare(req.query.password,hash);
    if(passhash){
     passvalide = true;
    }
@@ -676,7 +676,7 @@ else{
    }
     if(passvalide){
         if(newapi == false){
-        await tacheModel.getCleApi(req.body.courriel)
+        await tacheModel.getCleApi(req.query.courriel)
         .then((cleapi)=>{
             if(!cleapi[0]){
                 res.status(404);
@@ -686,9 +686,9 @@ else{
                 return;
             }
            res.status(200);
-           res.send({
-            "cle api": cleapi
-           });
+           res.send(
+             cleapi[0]
+           );
            return;
     
     
@@ -712,12 +712,12 @@ else{
                     }
                 })
              }
-        await tacheModel.newCleApi(req.body.courriel,api)
+        await tacheModel.newCleApi(req.query.courriel,api)
         .then((cleapi)=>{
          
            res.status(200);
            res.send({
-            "cle api": api
+            "cle_api": api
            });
            return;
     

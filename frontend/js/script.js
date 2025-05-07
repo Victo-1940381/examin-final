@@ -27,4 +27,27 @@ const url = "http://localhost:3000/Utilisateur";
 
 
 }
+function getApi(){
+    let emailapi =document.getElementById("courrielapi").value;
+    let passapi = document.getElementById("passapi").value;
+    let generer = document.getElementById("generationapicle").checked;
+    const urlpasgene = `http://localhost:3000/CleApi?courriel=${emailapi}&password=${passapi}`;
+    const urlgene = `http://localhost:3000/CleApi?courriel=${emailapi}&password=${passapi}&genererapi=true`;
+    if(generer == false){
+        fetch(urlpasgene)
+        .then(response => response.json())
+        .then(data => {
+             alert(`votre cle Api: ${data.cle_api}`);
+        })
+        .catch(error => console.error(error));
+    }
+    else{
+        fetch(urlgene)
+        .then(response => response.json())
+        .then(data => {
+             alert(`votre cle Api: ${data.cle_api}`);
+        })
+        .catch(error => console.error(error));
+    }
+}
 //document.getElementById("buttonCreer").onclick = creeruser();
