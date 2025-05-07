@@ -1,7 +1,116 @@
 {
     "openapi": "3.1.0",
     "info":{
-        "title": "documentation API",
+        "title": "Examen Final",
+        "summary": "cet API permet de faire la gestion de taches, de sous-taches et d'utilisateurs",
+        "description":" cet API permet d'ajouter,de supprimer et de modifier une tache et une sous-tache. elle permet aussi d'afficher une liste de taches de la base de donnée. elle permet de créer un utilisateur et de generer une cle d'api",
         "version": "1.0.0"
+    },
+    "servers":[
+        {
+            "url": "http://localhost:3000/",
+            "description":"Serveur de Développement"
+        },
+        {
+            "url": "https://examin-final.onrender.com",
+            "description":"Serveur en ligne"
+        }
+    ],
+    "paths":{
+        "/ListeTache/{id}": {
+            "get": {
+                "summary":"Afficher une liste de taches",
+                "tags":["tache"],
+                "description":"afficher une liste de taches en fonction de l'id de l'utilisateur",
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "description":"Id de l'utilisateur",
+                        "required":true,
+                        "schema":{
+                            "type": "integer",
+                            "format":"int32",
+                            "exemple": "1"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                       "description": "liste retrouver avec succes",
+                       "content":{
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties":{
+                                    "titre":{
+                                        "type":"string",
+                                        "example":"Développement de l'API"
+                                    },
+                                    "description":{
+                                        "type":"string",
+                                        "example":"creation et developpement  de l'API"
+                                    }
+                                }
+                            }
+                        }
+                       } 
+                    },
+                    "400":{
+                        "description":"Erreur de paramètres manquants ou invalide",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"L'id de l'utilisateur est obligatoire et doit être supérieur à 0"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    },
+                    "404":{
+                        "description":"aucunes valeurs trouver dans la base de donnée",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"taches introuvable avec l'id utilisateur 1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"erreur serveur",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"Erreur lors de la récupération des taches avec l'id utilisateur 1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/DetailTache/{id}":{
+            
+        }
     }
+   
 }
