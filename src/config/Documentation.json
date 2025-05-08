@@ -1146,7 +1146,7 @@
             }
            }
         },
-        "/utilisateur":{
+        "/Utilisateur":{
             "post":{
                 "summary":"ajouter un utilisateur",
                 "tags":["utilisateur"],
@@ -1239,6 +1239,118 @@
                             }
                         }
                     }
+                }
+            }
+        },
+        "/CleApi":{
+            "get":{
+                "summary":"recuper une cle d'api",
+                "tags":["cleapi"],
+                "description":"recupere une cle d'api en fonction de son courriel et son mot de passe",
+                "parameters":[
+                     {
+                        "in":"query",
+                        "name":"courriel",
+                        "description":"courriel de l'utilisateur",
+                        "required":true,
+                        "schema":{
+                            "type": "string",
+                            "exemple": "provostludovic@gmail.com"
+                        }
+                    },
+                    {
+                        "in":"query",
+                        "name":"password",
+                        "description":"mot de passe de l'utilisateur",
+                        "required":true,
+                        "schema":{
+                            "type": "string",
+                            "exemple": "provost2025"
+                        }
+                    },
+                    {
+                        "in":"query",
+                        "name":"genererapi",
+                        "description":"generer une nouvelle clé d'API",
+                        "required":false,
+                        "schema":{
+                            "type": "boolean",
+                            "exemple": "true"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"cle API retrouvée avec sucess",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "cle_api":{
+                                            "type":"string",
+                                            "exemple":"ZNFA3L3LENZUQ6DBMD4RK0Z0JNI64V"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Erreur de paramètres manquants ou invalides",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "erreur":{
+                                            "type":"string",
+                                            "exemple":"le format des donnée est invalide"
+                                        },
+                                        "champs manquant":{
+                                            "type":"array",
+                                            "items":{
+                                                "type":"string",
+                                                "exemple":"courriel"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                   "404":{
+                    "description":"aucun utilisateur trouvée",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "erreur":{
+                                        "type":"string",
+                                        "exemple":"aucun utilisateur trouver avec le courriel: provostludovic@gmail.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                   },
+                   "500":{
+                    "description":"erreur serveur",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "erreur":{
+                                        "type":"string",
+                                        "exemple":"echec lors de la recuperation de la cle api"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                   }
                 }
             }
         }

@@ -680,7 +680,7 @@ else{
     passvalide = true;
    }
    else{
-    res.status(404);
+    res.status(400);
     res.send({"erreur":"mot de passe invalide"});
    }
     if(passvalide){
