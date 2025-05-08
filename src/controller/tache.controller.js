@@ -570,17 +570,23 @@ const ajoutUtilisateur = async  (req,res) => {
     }
     else if(!courriel.includes("@")){
         res.status(400);
-        res.send({"erreur":"le courriel doit contenir un @"});
+        res.send({"erreur":"le courriel doit contenir un @",
+            "champs manquant": manquant
+        });
         return;
     }
     else if(req.body.nom >30){
         res.status(400);
-        res.send({"erreur":"le nom est trop long = 30 charactere max"});
+        res.send({"erreur":"le nom est trop long = 30 charactere max",
+            "champs manquant": manquant
+        });
         return;
     }
     else if(req.body.prenom >30){
         res.status(400);
-        res.send({"erreur":"le prenom est trop long = 30 charactere max"});
+        res.send({"erreur":"le prenom est trop long = 30 charactere max",
+            "champs manquant": manquant
+        });
         return;
     }
     else{

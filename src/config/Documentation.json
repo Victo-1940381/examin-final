@@ -723,7 +723,7 @@
         "/SousTache":{
             "post":{
                 "summary":"Ajouter une sous-tache",
-                "tags":["Sous-Tache"],
+                "tags":["sous-tache"],
                 "description": "Ajouter une sous-tache en fournissant un id de la tache, un titre et un status de la sous-tache",
                 "requestBody":{
                     "required": true,
@@ -942,7 +942,7 @@
         "/SousTache/{id}":{
            "put":{
             "summary": "modifier le status d'une sous-tache",
-            "tags":["tache"],
+            "tags":["sous-tache"],
             "description":"modifier le status d'une sous-tache en fonction de son id",
             "parameters":[
                 {
@@ -1040,7 +1040,7 @@
            },
            "delete":{
             "summary":"supprimer une sous-tache",
-            "tags":["tache"],
+            "tags":["sous-tache"],
             "description":"supprimer une sous-tache en fonction de son id",
             "parameters":[
                 {
@@ -1145,6 +1145,102 @@
                 }
             }
            }
+        },
+        "/utilisateur":{
+            "post":{
+                "summary":"ajouter un utilisateur",
+                "tags":["utilisateur"],
+                "description":"ajouter un utilisateur en fournissant son nom, prenom,courriel et son mot de passe",
+                "requestBody":{
+                      "required": true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "nom":{
+                                        "type":"string",
+                                        "exemple":"provost"
+                                    },
+                                    "prenom":{
+                                        "type":"string",
+                                        "exemple":"ludovic"
+                                    },
+                                    "courriel":{
+                                        "type":"string",
+                                        "exemple":"provostludovic@gmail.com"
+                                    },
+                                    "password":{
+                                        "type":"string",
+                                        "exemple":"provost2025"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"utilisateur ajouté avec succes",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "exemple":"l'utilisateur' [ludovic] a été ajouter avec succes"
+                                        },
+                                        "cle_api":{
+                                            "type":"string",
+                                            "exemple":"ZNFA3L3LENZUQ6DBMD4RK0Z0JNI64V"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Erreur de paramètres manquants ou invalides",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "erreur":{
+                                            "type":"string",
+                                            "exemple":"le format des donnée est invalide"
+                                        },
+                                        "champs manquant":{
+                                            "type":"array",
+                                            "items":{
+                                                "type":"string",
+                                                "exemple":"nom"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"erreur serveur",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "erreur":{
+                                            "type":"string",
+                                            "exemple":"`echec lors de la creation de l'utilisateur [ludovic]"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
    
