@@ -385,7 +385,7 @@ const AjoutSousTache = async (req,res) => {
                 "complete":req.body.complete
             };
             let rep = {"message":`la sous-tache [${req.body.titre}] a été ajouter avec succes`,
-                    "tache":soustacheInfo};
+                    "sous-tache":soustacheInfo};
                     res.status(200);
                     res.send(rep);
         })
@@ -444,7 +444,7 @@ const ModifSousTache = async (req,res) => {
             "titre":req.body.titre
         };
         let rep = {"message":`la sous-tache [${req.body.titre}] a été modifier avec succes`,
-                "tache":soustacheInfo};
+                "sous-tache":soustacheInfo};
                 res.status(200);
                 res.send(rep);
     })
@@ -476,7 +476,7 @@ const ModifStatusSousTache = async (req,res) => {
             "complete":req.body.complete
         };
         let rep = {"message":`la sous-tache [${req.params.id}] a été modifier avec succes`,
-                "tache":soustacheInfo};
+                "sous-tache":soustacheInfo};
                 res.status(200);
                 res.send(rep);
     })
@@ -525,7 +525,7 @@ const supprimerSousTache = async (req,res) => {
            }
            else{
             let rep = {"message": `la sous-tache ${req.params.id} a ete supprimer avec success`,
-            "tache":soustacheInfo};
+            "sous-tache":soustacheInfo};
             res.status(200);
             res.send(rep);
            }
