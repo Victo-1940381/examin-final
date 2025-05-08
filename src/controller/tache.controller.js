@@ -76,6 +76,7 @@ else{
 };
 const DetailTache = async (req,res) => {
    let tached;
+   
     if(!req.params.id || parseInt(req.params.id) <= 0){
         res.status(400);
         res.send({
@@ -92,6 +93,7 @@ const DetailTache = async (req,res) => {
             });
             return;
         }
+        
         tached = tache;
 
     })
@@ -104,15 +106,14 @@ const DetailTache = async (req,res) => {
     });
     await tacheModel.getListeSousTache(req.params.id)
     .then((soustache)=>{
-        if(!soustache[0]){
-            res.status(404);
-            res.send({
-                message: `sous-taches introuvable avec l'id tache  ${req.params.id}`
-            });
-            return;
-        }
+       
+       
+       
+        
         res.status(200);
-        res.send({"Tache": tached, "Sous-Tache": soustache});
+        res.send({"Tache": tached, "Sous-Tache": soustache});  
+       
+
     })
     .catch((erreur)=>{
         console.log('Erreur : ', erreur);

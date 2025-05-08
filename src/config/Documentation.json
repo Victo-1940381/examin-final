@@ -45,11 +45,11 @@
                                 "properties":{
                                     "titre":{
                                         "type":"string",
-                                        "example":"Développement de l'API"
+                                        "exemple":"Développement de l'API"
                                     },
                                     "description":{
                                         "type":"string",
-                                        "example":"creation et developpement  de l'API"
+                                        "exemple":"creation et developpement  de l'API"
                                     }
                                 }
                             }
@@ -57,7 +57,7 @@
                        } 
                     },
                     "400":{
-                        "description":"Erreur de paramètres manquants ou invalide",
+                        "description":"Erreur de paramètres manquants ou invalides",
                         "content":{
                             "application/json":{
                                 "schema":{
@@ -65,7 +65,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "example":"L'id de l'utilisateur est obligatoire et doit être supérieur à 0"
+                                            "exemple":"L'id de l'utilisateur est obligatoire et doit être supérieur à 0"
                                         }
                                     }
                                 }
@@ -82,7 +82,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "example":"taches introuvable avec l'id utilisateur 1"
+                                            "exemple":"taches introuvable avec l'id utilisateur 1"
                                         }
                                     }
                                 }
@@ -98,7 +98,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "example":"Erreur lors de la récupération des taches avec l'id utilisateur 1"
+                                            "exemple":"Erreur lors de la récupération des taches avec l'id utilisateur 1"
                                         }
                                     }
                                 }
@@ -109,7 +109,130 @@
             }
         },
         "/DetailTache/{id}":{
-            
+           "get":{
+            "summary": "afficher les details d'une tache",
+            "tags":["tache"],
+            "description":"afficher les details d'une tache avec toutes ses sous-taches en fonction de son id",
+            "parameters":[
+                {
+                    "in":"path",
+                    "name":"id",
+                    "description":"Id de la tache",
+                    "required":true,
+                    "schema":{
+                        "type":"integer",
+                        "format":"int32",
+                        "exemple":"1"
+                  }
+                }
+            ],
+            "responses":{
+                "200":{
+                    "description":"details de la tache retrouvée avec succes",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "Tache":{
+                                        "type":"array",
+                                        "items":{
+                                            "type":"object",
+                                            "properties":{
+                                                "titre":{
+                                                    "type":"string",
+                                                    "exemple":"Développement de l'API"
+                                                },
+                                                "description":{
+                                                    "type":"string",
+                                                    "exemple":"creation et developpement  de l'API"
+                                                },
+                                                "date_debut": {
+                                                    "type": "string",
+                                                    "exemple":"2000-06-13T04:00:00.000Z"
+                                                },
+                                                "date_echeance":{
+                                                    "type":"string",
+                                                    "exemple":"2030-06-13T04:00:00.000Z"
+                                                },
+                                                "complete":{
+                                                    "type":"boolean",
+                                                    "exemple": false
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "Sous-Tache":{
+                                        "type":"array",
+                                        "items":{
+                                            "type":"object",
+                                            "properties":{
+                                                "titre":{
+                                                    "type":"string",
+                                                    "exemple":"créer les models"
+                                                },
+                                                "complete":{
+                                                    "type":"boolean",
+                                                    "exemple":false
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400":{
+                    "description":"Erreur de paramètres manquants ou invalides",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "message":{
+                                        "type":"string",
+                                        "exemple":"L'id de la tache est obligatoire et doit être supérieur à 0"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "404":{
+                    "description":"aucunes valeurs trouver dans la base de donnée",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "message":{
+                                        "type":"string",
+                                        "exemple":"tache introuvable avec l'id  1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "500":{
+                    "description": "erreur serveur",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "message":{
+                                        "type":"string",
+                                        "exemple":"Erreur lors de la récupération des detail de la tache avec l'id 1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+           } 
         }
     }
    
