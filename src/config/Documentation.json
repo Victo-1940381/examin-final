@@ -20,7 +20,7 @@
         "/ListeTache/{id}": {
             "get": {
                 "summary":"Afficher une liste de taches",
-                "tags":["tache"],
+                "tags":["Tache"],
                 "description":"afficher une liste de taches incomplete en fonction de l'id de l'utilisateur",
                 "parameters":[
                     {
@@ -31,7 +31,7 @@
                         "schema":{
                             "type": "integer",
                             "format":"int32",
-                            "exemple": "1"
+                            "example": "1"
                         }
                     },
                     {
@@ -41,7 +41,7 @@
                         "required":false,
                         "schema":{
                             "type": "boolean",
-                            "exemple": true
+                            "example": true
                         }
                     }
                 ],
@@ -55,11 +55,11 @@
                                 "properties":{
                                     "titre":{
                                         "type":"string",
-                                        "exemple":"Développement de l'API"
+                                        "example":"Développement de l'API"
                                     },
                                     "description":{
                                         "type":"string",
-                                        "exemple":"creation et developpement  de l'API"
+                                        "example":"creation et developpement  de l'API"
                                     }
                                 }
                             }
@@ -75,7 +75,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"L'id de l'utilisateur est obligatoire et doit être supérieur à 0"
+                                            "example":"L'id de l'utilisateur est obligatoire et doit être supérieur à 0"
                                         }
                                     }
                                 }
@@ -92,7 +92,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"taches introuvable avec l'id utilisateur 1"
+                                            "example":"taches introuvable avec l'id utilisateur 1"
                                         }
                                     }
                                 }
@@ -108,7 +108,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"Erreur lors de la récupération des taches avec l'id utilisateur 1"
+                                            "example":"Erreur lors de la récupération des taches avec l'id utilisateur 1"
                                         }
                                     }
                                 }
@@ -121,7 +121,7 @@
         "/DetailTache/{id}":{
            "get":{
             "summary": "afficher les details d'une tache",
-            "tags":["tache"],
+            "tags":["Tache"],
             "description":"afficher les details d'une tache avec toutes ses sous-taches en fonction de son id",
             "parameters":[
                 {
@@ -132,7 +132,7 @@
                     "schema":{
                         "type":"integer",
                         "format":"int32",
-                        "exemple":"1"
+                        "example":"1"
                   }
                 }
             ],
@@ -151,23 +151,23 @@
                                             "properties":{
                                                 "titre":{
                                                     "type":"string",
-                                                    "exemple":"Développement de l'API"
+                                                    "example":"Développement de l'API"
                                                 },
                                                 "description":{
                                                     "type":"string",
-                                                    "exemple":"creation et developpement  de l'API"
+                                                    "example":"creation et developpement  de l'API"
                                                 },
                                                 "date_debut": {
                                                     "type": "string",
-                                                    "exemple":"2000-06-13T04:00:00.000Z"
+                                                    "example":"2000-06-13T04:00:00.000Z"
                                                 },
                                                 "date_echeance":{
                                                     "type":"string",
-                                                    "exemple":"2030-06-13T04:00:00.000Z"
+                                                    "example":"2030-06-13T04:00:00.000Z"
                                                 },
                                                 "complete":{
                                                     "type":"boolean",
-                                                    "exemple": false
+                                                    "example": false
                                                 }
                                             }
                                         }
@@ -179,11 +179,11 @@
                                             "properties":{
                                                 "titre":{
                                                     "type":"string",
-                                                    "exemple":"créer les models"
+                                                    "example":"créer les models"
                                                 },
                                                 "complete":{
                                                     "type":"boolean",
-                                                    "exemple":false
+                                                    "example":false
                                                 }
                                             }
                                         }
@@ -202,7 +202,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"L'id de la tache est obligatoire et doit être supérieur à 0"
+                                        "example":"L'id de la tache est obligatoire et doit être supérieur à 0"
                                     }
                                 }
                             }
@@ -218,7 +218,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"tache introuvable avec l'id  1"
+                                        "example":"tache introuvable avec l'id  1"
                                     }
                                 }
                             }
@@ -234,7 +234,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"Erreur lors de la récupération des detail de la tache avec l'id 1"
+                                        "example":"Erreur lors de la récupération des detail de la tache avec l'id 1"
                                     }
                                 }
                             }
@@ -259,27 +259,27 @@
                                     "utilisateur_id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "titre":{
                                         "type":"string",
-                                        "exemple":"Développement de l'API"
+                                        "example":"Développement de l'API"
                                     },
                                     "description":{
                                         "type":"string",
-                                        "exemple":"creation et developpement  de l'API"
+                                        "example":"creation et developpement  de l'API"
                                     },
                                     "date_debut":{
                                         "type":"string",
-                                        "exemple":"2000-06-14"
+                                        "example":"2000-06-14"
                                     },
                                     "date_echeance":{
                                         "type":"string",
-                                        "exemple":"2007-06-14"
+                                        "example":"2007-06-14"
                                     },
                                     "complete":{
                                         "type":"boolean",
-                                        "exemple":"true"
+                                        "example":true
                                     }
                                 }
                             }
@@ -296,7 +296,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"la tache [Développement de l'API] a été ajouter avec succes"
+                                            "example":"la tache [Développement de l'API] a été ajouter avec succes"
                                         },
                                         "tache":{
                                             "type":"object",
@@ -304,27 +304,27 @@
                                                 "utilisateur_id":{
                                                     "type": "integer",
                                                     "format":"int32",
-                                                    "exemple": 1
+                                                    "example": 1
                                                 },
                                                 "titre":{
                                                     "type":"string",
-                                                    "exemple":"Développement de l'API"
+                                                    "example":"Développement de l'API"
                                                 },
                                                 "description":{
                                                     "type":"string",
-                                                    "exemple":"creation et developpement  de l'API"
+                                                    "example":"creation et developpement  de l'API"
                                                 },
                                                 "date_debut":{
                                                     "type":"string",
-                                                    "exemple":"2000-06-14"
+                                                    "example":"2000-06-14"
                                                 },
                                                 "date_echeance":{
                                                     "type":"string",
-                                                    "exemple":"2007-06-14"
+                                                    "example":"2007-06-14"
                                                 },
                                                 "complete":{
                                                     "type":"boolean",
-                                                    "exemple":"true"
+                                                    "example":true
                                                 }
                                             }
                                         }
@@ -342,13 +342,13 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"le format des donnée est invalide"
+                                            "example":"le format des donnée est invalide"
                                         },
                                         "champs manquant":{
                                             "type":"array",
                                             "items":{
                                                 "type":"string",
-                                                "exemple":"titre"
+                                                "example":"titre"
                                             }
                                         }
                                     }
@@ -365,7 +365,7 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"echec lors de la creation de la tache Développement de l'API"
+                                            "example":"echec lors de la creation de la tache Développement de l'API"
                                         }
                                     }
                                 }
@@ -376,7 +376,7 @@
             },
             "put":{
                 "summary":"modifier une tache",
-                "tache":["tache"],
+                "tags":["Tache"],
                 "description":"modifier une tache en fonction de l'id dans le corps de la requete",
                 "requestBody":{
                     "required":true,
@@ -388,28 +388,28 @@
                                     "id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "utilisateur_id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "titre":{
                                         "type":"string",
-                                        "exemple":"Développement de l'API"
+                                        "example":"Développement de l'API"
                                     },
                                     "description":{
                                         "type":"string",
-                                        "exemple":"creation et developpement  de l'API"
+                                        "example":"creation et developpement  de l'API"
                                     },
                                     "date_debut":{
                                         "type":"string",
-                                        "exemple":"2000-06-14"
+                                        "example":"2000-06-14"
                                     },
                                     "date_echeance":{
                                         "type":"string",
-                                        "exemple":"2007-06-14"
+                                        "example":"2007-06-14"
                                     }
                                 }
                             }
@@ -426,7 +426,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"la tache [Développement de l'API] a été modifier avec succes"
+                                            "example":"la tache [Développement de l'API] a été modifier avec succes"
                                         },
                                         "tache":{
                                             "type":"object",
@@ -434,28 +434,28 @@
                                                 "id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "utilisateur_id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "titre":{
                                         "type":"string",
-                                        "exemple":"Développement de l'API"
+                                        "example":"Développement de l'API"
                                     },
                                     "description":{
                                         "type":"string",
-                                        "exemple":"creation et developpement  de l'API"
+                                        "example":"creation et developpement  de l'API"
                                     },
                                     "date_debut":{
                                         "type":"string",
-                                        "exemple":"2000-06-14"
+                                        "example":"2000-06-14"
                                     },
                                     "date_echeance":{
                                         "type":"string",
-                                        "exemple":"2007-06-14"
+                                        "example":"2007-06-14"
                                     }
                                             }
                                         }
@@ -473,13 +473,13 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"le format des donnée est invalide"
+                                            "example":"le format des donnée est invalide"
                                         },
                                         "champs manquant":{
                                             "type":"array",
                                             "items":{
                                                 "type":"string",
-                                                "exemple":"id"
+                                                "example":"id"
                                             }
                                         }
                                     }
@@ -496,7 +496,7 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"echec lors de la modification de la tache [Documentation de l'API]"
+                                            "example":"echec lors de la modification de la tache [Documentation de l'API]"
                                         }
                                     }
                                 }
@@ -509,7 +509,7 @@
         "/Tache/{id}":{
            "put":{
             "summary": "modifier le status d'une tache",
-            "tags":["tache"],
+            "tags":["Tache"],
             "description":"modifier le status d'une tache en fonction de son id",
             "parameters":[
                 {
@@ -520,7 +520,7 @@
                     "schema":{
                         "type":"integer",
                         "format":"int32",
-                        "exemple":1
+                        "example":1
                     }
                 }
             ],
@@ -533,7 +533,7 @@
                             "properties":{
                                 "complete":{
                                     "type":"boolean",
-                                    "exemple":"true"
+                                    "example":true
                                 }
                             }
                         }
@@ -550,7 +550,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"la tache [1] a été modifier avec succes"
+                                        "example":"la tache [1] a été modifier avec succes"
                                     },
                                     "tache":{
                                         "type":"object",
@@ -558,11 +558,11 @@
                                             "id":{
                                                 "type":"integer",
                                                 "format":"int32",
-                                                "exemple":1
+                                                "example":1
                                             },
                                             "complete":{
                                                 "type":"boolean",
-                                                "exemple":"false"
+                                                "example":false
                                             }
                                         }
                                     }
@@ -580,7 +580,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"L'id de la tache est requis et doit être supérieur à 0"
+                                        "example":"L'id de la tache est requis et doit être supérieur à 0"
                                     }
                                 }
                             }
@@ -596,7 +596,7 @@
                                 "properties":{
                                     "erreur":{
                                         "type":"string",
-                                        "exemple":"echec lors de la modification de la tache [1]"
+                                        "example":"echec lors de la modification de la tache [1]"
                                     }
                                 }
                             }
@@ -607,7 +607,7 @@
            },
            "delete":{
             "summary":"supprimer une tache",
-            "tags":["tache"],
+            "tags":["Tache"],
             "description":"supprimer une tache en fonction de son id",
             "parameters":[
                 {
@@ -618,7 +618,7 @@
                     "schema":{
                         "type":"integer",
                         "format":"int32",
-                        "exemple":1
+                        "example":1
                     }
                 }
             ],
@@ -632,7 +632,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"la tache 2 a ete supprimer avec success"
+                                        "example":"la tache 2 a ete supprimer avec success"
                                     },
                                      "Tache":{
                                         "type":"array",
@@ -641,23 +641,23 @@
                                             "properties":{
                                                 "titre":{
                                                     "type":"string",
-                                                    "exemple":"Développement de l'API"
+                                                    "example":"Développement de l'API"
                                                 },
                                                 "description":{
                                                     "type":"string",
-                                                    "exemple":"creation et developpement  de l'API"
+                                                    "example":"creation et developpement  de l'API"
                                                 },
                                                 "date_debut": {
                                                     "type": "string",
-                                                    "exemple":"2000-06-13T04:00:00.000Z"
+                                                    "example":"2000-06-13T04:00:00.000Z"
                                                 },
                                                 "date_echeance":{
                                                     "type":"string",
-                                                    "exemple":"2030-06-13T04:00:00.000Z"
+                                                    "example":"2030-06-13T04:00:00.000Z"
                                                 },
                                                 "complete":{
                                                     "type":"boolean",
-                                                    "exemple": false
+                                                    "example": false
                                                 }
                                             }
                                         }
@@ -678,7 +678,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"L'id de la tache est requis et doit être supérieur à 0"
+                                        "example":"L'id de la tache est requis et doit être supérieur à 0"
                                     }
                                 }
                             }
@@ -694,7 +694,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"tache introuvable avec l'id 1"
+                                        "example":"tache introuvable avec l'id 1"
                                     }
                                 }
                             }
@@ -710,7 +710,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"Erreur lors de la suppresion de la tache avec l'id  1"
+                                        "example":"Erreur lors de la suppresion de la tache avec l'id  1"
                                     }
                                 }
                             }
@@ -723,7 +723,7 @@
         "/SousTache":{
             "post":{
                 "summary":"Ajouter une sous-tache",
-                "tags":["sous-tache"],
+                "tags":["Sous-Tache"],
                 "description": "Ajouter une sous-tache en fournissant un id de la tache, un titre et un status de la sous-tache",
                 "requestBody":{
                     "required": true,
@@ -735,15 +735,15 @@
                                     "tache_id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "titre":{
                                         "type":"string",
-                                        "exemple":"fini la section path"
+                                        "example":"fini la section path"
                                     },
                                     "complete":{
                                         "type":"boolean",
-                                        "exemple":"true"
+                                        "example":true
                                     }
                                 }
                             }
@@ -760,7 +760,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"la sous-tache [finir la section path] a été ajouter avec succes"
+                                            "example":"la sous-tache [finir la section path] a été ajouter avec succes"
                                         },
                                         "sous-tache":{
                                             "type":"object",
@@ -768,20 +768,20 @@
                                                 "id":{
                                                     "type": "integer",
                                                     "format":"int32",
-                                                    "exemple": 1
+                                                    "example": 1
                                                 },
                                                 "tache_id":{
                                                     "type": "integer",
                                                     "format":"int32",
-                                                    "exemple": 1
+                                                    "example": 1
                                                 },
                                                 "titre":{
                                                     "type":"string",
-                                                    "exemple":"finir la section path"
+                                                    "example":"finir la section path"
                                                 },
                                                 "complete":{
                                                     "type":"boolean",
-                                                    "exemple":"true"
+                                                    "example":true
                                                 }
                                             }
                                         }
@@ -799,13 +799,13 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"le format des donnée est invalide"
+                                            "example":"le format des donnée est invalide"
                                         },
                                         "champs manquant":{
                                             "type":"array",
                                             "items":{
                                                 "type":"string",
-                                                "exemple":"titre"
+                                                "example":"titre"
                                             }
                                         }
                                     }
@@ -822,7 +822,7 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"echec lors de la creation de la sous-tache fini section path"
+                                            "example":"echec lors de la creation de la sous-tache fini section path"
                                         }
                                     }
                                 }
@@ -833,7 +833,7 @@
             },
             "put":{
                 "summary":"modifier une sous-tache",
-                "tache":["sous-tache"],
+                "tags":["Sous-Tache"],
                 "description":"modifier une sous-tache en fonction de l'id dans le corps de la requete",
                 "requestBody":{
                     "required":true,
@@ -845,16 +845,16 @@
                                     "id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "tache_id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "titre":{
                                         "type":"string",
-                                        "exemple":"finir la section path"
+                                        "example":"finir la section path"
                                     }
                                 }
                             }
@@ -871,7 +871,7 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"la sous-tache [finir la section path] a été modifier avec succes"
+                                            "example":"la sous-tache [finir la section path] a été modifier avec succes"
                                         },
                                         "tache":{
                                             "type":"object",
@@ -879,16 +879,16 @@
                                                 "id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "tache_id":{
                                         "type": "integer",
                                         "format":"int32",
-                                        "exemple": 1
+                                        "example": 1
                                     },
                                     "titre":{
                                         "type":"string",
-                                        "exemple":"Développement de l'API"
+                                        "example":"Développement de l'API"
                                     }
                                             }
                                         }
@@ -906,13 +906,13 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"le format des donnée est invalide"
+                                            "example":"le format des donnée est invalide"
                                         },
                                         "champs manquant":{
                                             "type":"array",
                                             "items":{
                                                 "type":"string",
-                                                "exemple":"id"
+                                                "example":"id"
                                             }
                                         }
                                     }
@@ -929,7 +929,7 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"echec lors de la modification de la sous-tache [finir la section path]"
+                                            "example":"echec lors de la modification de la sous-tache [finir la section path]"
                                         }
                                     }
                                 }
@@ -942,7 +942,7 @@
         "/SousTache/{id}":{
            "put":{
             "summary": "modifier le status d'une sous-tache",
-            "tags":["sous-tache"],
+            "tags":["Sous-Tache"],
             "description":"modifier le status d'une sous-tache en fonction de son id",
             "parameters":[
                 {
@@ -953,7 +953,7 @@
                     "schema":{
                         "type":"integer",
                         "format":"int32",
-                        "exemple":1
+                        "example":1
                     }
                 }
             ],
@@ -966,7 +966,7 @@
                             "properties":{
                                 "complete":{
                                     "type":"boolean",
-                                    "exemple":"true"
+                                    "example":true
                                 }
                             }
                         }
@@ -983,7 +983,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"la sous-tache [1] a été modifier avec succes"
+                                        "example":"la sous-tache [1] a été modifier avec succes"
                                     },
                                     "sous-tache":{
                                         "type":"object",
@@ -991,11 +991,11 @@
                                             "id":{
                                                 "type":"integer",
                                                 "format":"int32",
-                                                "exemple":1
+                                                "example":1
                                             },
                                             "complete":{
                                                 "type":"boolean",
-                                                "exemple":"false"
+                                                "example":false
                                             }
                                         }
                                     }
@@ -1013,7 +1013,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"L'id de la sous-tache est requis et doit être supérieur à 0"
+                                        "example":"L'id de la sous-tache est requis et doit être supérieur à 0"
                                     }
                                 }
                             }
@@ -1029,7 +1029,7 @@
                                 "properties":{
                                     "erreur":{
                                         "type":"string",
-                                        "exemple":"echec lors de la modification de la sous-tache [1]"
+                                        "example":"echec lors de la modification de la sous-tache [1]"
                                     }
                                 }
                             }
@@ -1040,7 +1040,7 @@
            },
            "delete":{
             "summary":"supprimer une sous-tache",
-            "tags":["sous-tache"],
+            "tags":["Sous-Tache"],
             "description":"supprimer une sous-tache en fonction de son id",
             "parameters":[
                 {
@@ -1051,7 +1051,7 @@
                     "schema":{
                         "type":"integer",
                         "format":"int32",
-                        "exemple":1
+                        "example":1
                     }
                 }
             ],
@@ -1065,7 +1065,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"la sous-tache 2 a ete supprimer avec success"
+                                        "example":"la sous-tache 2 a ete supprimer avec success"
                                     },
                                      "sous-Tache":{
                                         "type":"array",
@@ -1075,15 +1075,15 @@
                                                 "tache_id":{
                                                     "type":"integer",
                                                      "format":"int32",
-                                                    "exemple":1 
+                                                    "example":1 
                                                 },
                                                 "titre":{
                                                     "type":"string",
-                                                    "exemple":"finir la section path"
+                                                    "example":"finir la section path"
                                                 },
                                                 "complete":{
                                                     "type":"boolean",
-                                                    "exemple": "false"
+                                                    "example": false
                                                 }
                                             }
                                         }
@@ -1104,7 +1104,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"L'id de la sous-tache est requis et doit être supérieur à 0"
+                                        "example":"L'id de la sous-tache est requis et doit être supérieur à 0"
                                     }
                                 }
                             }
@@ -1120,7 +1120,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"sous-tache introuvable avec l'id 1"
+                                        "example":"sous-tache introuvable avec l'id 1"
                                     }
                                 }
                             }
@@ -1136,7 +1136,7 @@
                                 "properties":{
                                     "message":{
                                         "type":"string",
-                                        "exemple":"Erreur lors de la suppresion de la sous-tache avec l'id  1"
+                                        "example":"Erreur lors de la suppresion de la sous-tache avec l'id  1"
                                     }
                                 }
                             }
@@ -1149,7 +1149,7 @@
         "/Utilisateur":{
             "post":{
                 "summary":"ajouter un utilisateur",
-                "tags":["utilisateur"],
+                "tags":["Utilisateur"],
                 "description":"ajouter un utilisateur en fournissant son nom, prenom,courriel et son mot de passe",
                 "requestBody":{
                       "required": true,
@@ -1160,19 +1160,19 @@
                                 "properties":{
                                     "nom":{
                                         "type":"string",
-                                        "exemple":"provost"
+                                        "example":"provost"
                                     },
                                     "prenom":{
                                         "type":"string",
-                                        "exemple":"ludovic"
+                                        "example":"ludovic"
                                     },
                                     "courriel":{
                                         "type":"string",
-                                        "exemple":"provostludovic@gmail.com"
+                                        "example":"provostludovic@gmail.com"
                                     },
                                     "password":{
                                         "type":"string",
-                                        "exemple":"provost2025"
+                                        "example":"provost2025"
                                     }
                                 }
                             }
@@ -1189,11 +1189,11 @@
                                     "properties":{
                                         "message":{
                                             "type":"string",
-                                            "exemple":"l'utilisateur' [ludovic] a été ajouter avec succes"
+                                            "example":"l'utilisateur' [ludovic] a été ajouter avec succes"
                                         },
                                         "cle_api":{
                                             "type":"string",
-                                            "exemple":"ZNFA3L3LENZUQ6DBMD4RK0Z0JNI64V"
+                                            "example":"ZNFA3L3LENZUQ6DBMD4RK0Z0JNI64V"
                                         }
                                     }
                                 }
@@ -1209,13 +1209,13 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"le format des donnée est invalide"
+                                            "example":"le format des donnée est invalide"
                                         },
                                         "champs manquant":{
                                             "type":"array",
                                             "items":{
                                                 "type":"string",
-                                                "exemple":"nom"
+                                                "example":"nom"
                                             }
                                         }
                                     }
@@ -1232,7 +1232,7 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"`echec lors de la creation de l'utilisateur [ludovic]"
+                                            "example":"`echec lors de la creation de l'utilisateur [ludovic]"
                                         }
                                     }
                                 }
@@ -1245,7 +1245,7 @@
         "/CleApi":{
             "get":{
                 "summary":"recuper une cle d'api",
-                "tags":["cleapi"],
+                "tags":["API"],
                 "description":"recupere une cle d'api en fonction de son courriel et son mot de passe",
                 "parameters":[
                      {
@@ -1255,7 +1255,7 @@
                         "required":true,
                         "schema":{
                             "type": "string",
-                            "exemple": "provostludovic@gmail.com"
+                            "example": "provostludovic@gmail.com"
                         }
                     },
                     {
@@ -1265,7 +1265,7 @@
                         "required":true,
                         "schema":{
                             "type": "string",
-                            "exemple": "provost2025"
+                            "example": "provost2025"
                         }
                     },
                     {
@@ -1275,7 +1275,7 @@
                         "required":false,
                         "schema":{
                             "type": "boolean",
-                            "exemple": "true"
+                            "example": true
                         }
                     }
                 ],
@@ -1289,7 +1289,7 @@
                                     "properties":{
                                         "cle_api":{
                                             "type":"string",
-                                            "exemple":"ZNFA3L3LENZUQ6DBMD4RK0Z0JNI64V"
+                                            "example":"ZNFA3L3LENZUQ6DBMD4RK0Z0JNI64V"
                                         }
                                     }
                                 }
@@ -1305,13 +1305,13 @@
                                     "properties":{
                                         "erreur":{
                                             "type":"string",
-                                            "exemple":"le format des donnée est invalide"
+                                            "example":"le format des donnée est invalide"
                                         },
                                         "champs manquant":{
                                             "type":"array",
                                             "items":{
                                                 "type":"string",
-                                                "exemple":"courriel"
+                                                "example":"courriel"
                                             }
                                         }
                                     }
@@ -1328,7 +1328,7 @@
                                 "properties":{
                                     "erreur":{
                                         "type":"string",
-                                        "exemple":"aucun utilisateur trouver avec le courriel: provostludovic@gmail.com"
+                                        "example":"aucun utilisateur trouver avec le courriel: provostludovic@gmail.com"
                                     }
                                 }
                             }
@@ -1344,7 +1344,7 @@
                                 "properties":{
                                     "erreur":{
                                         "type":"string",
-                                        "exemple":"echec lors de la recuperation de la cle api"
+                                        "example":"echec lors de la recuperation de la cle api"
                                     }
                                 }
                             }
