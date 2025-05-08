@@ -233,6 +233,101 @@
                 }
             }
            } 
+        },
+        "/Tache":{
+            "post":{
+                "summary":"Ajouter une tache",
+                "tags":["Tache"],
+                "description": "Ajouter une tache en fournissant un id d'utilisateur, un titre, une description, une date de debut, une date d'echeance et un status de la tache",
+                "requestBody":{
+                    "required": true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "utilisateur_id":{
+                                        "type": "integer",
+                                        "format":"int32",
+                                        "exemple": 1
+                                    },
+                                    "titre":{
+                                        "type":"string",
+                                        "exemple":"Développement de l'API"
+                                    },
+                                    "description":{
+                                        "type":"string",
+                                        "exemple":"creation et developpement  de l'API"
+                                    },
+                                    "date_debut":{
+                                        "type":"string",
+                                        "exemple":"2000-06-14"
+                                    },
+                                    "date_echeance":{
+                                        "type":"string",
+                                        "exemple":"2007-06-14"
+                                    },
+                                    "complete":{
+                                        "type":"boolean",
+                                        "exemple":"true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "Tache ajoutée avec succès",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "exemple":"la tache [Développement de l'API] a été ajouter avec succes"
+                                        },
+                                        "tache":{
+                                            "type":"object",
+                                            "properties":{
+                                                "utilisateur_id":{
+                                                    "type": "integer",
+                                                    "format":"int32",
+                                                    "exemple": 1
+                                                },
+                                                "titre":{
+                                                    "type":"string",
+                                                    "exemple":"Développement de l'API"
+                                                },
+                                                "description":{
+                                                    "type":"string",
+                                                    "exemple":"creation et developpement  de l'API"
+                                                },
+                                                "date_debut":{
+                                                    "type":"string",
+                                                    "exemple":"2000-06-14"
+                                                },
+                                                "date_echeance":{
+                                                    "type":"string",
+                                                    "exemple":"2007-06-14"
+                                                },
+                                                "complete":{
+                                                    "type":"boolean",
+                                                    "exemple":"true"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        
+                    }
+                }
+            }
         }
     }
    
