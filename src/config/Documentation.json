@@ -505,6 +505,106 @@
                     }
                 }
             }
+        },
+        "/Tache/{id}":{
+           "put":{
+            "summary": "modifier le status d'une tache",
+            "tags":["tache"],
+            "description":"modifier le status d'une tache en fonction de son id",
+            "parameters":[
+                {
+                    "in": "path",
+                    "name":"id",
+                    "description":"l'id de la tache",
+                    "required":true,
+                    "schema":{
+                        "type":"integer",
+                        "format":"int32",
+                        "exemple":1
+                    }
+                }
+            ],
+            "requestBody":{
+                "required":true,
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "complete":{
+                                    "type":"boolean",
+                                    "exemple":"true"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses":{
+                "200":{
+                    "description":"status tache modifiée avec succes",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "message":{
+                                        "type":"string",
+                                        "exemple":"la tache [1] a été modifier avec succes"
+                                    },
+                                    "tache":{
+                                        "type":"object",
+                                        "properties":{
+                                            "id":{
+                                                "type":"integer",
+                                                "format":"int32",
+                                                "exemple":1
+                                            },
+                                            "complete":{
+                                                "type":"boolean",
+                                                "exemple":"false"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400":{
+                    "description":"Erreur de paramètres manquants ou invalides",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "message":{
+                                        "type":"string",
+                                        "exemple":"L'id de la tache est requis et doit être supérieur à 0"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "500":{
+                    "description":"erreur serveur",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "erreur":{
+                                        "type":"string",
+                                        "exemple":"echec lors de la modification de la tache [1]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+           }
         }
     }
    
