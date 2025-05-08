@@ -191,14 +191,16 @@ const ModifTache = async (req,res) => {
     if(parseInt(req.body.utilisateur_id) <= 0){
         res.status(400);
         res.send({
-            message: "L'id de l'utilisateur doit être supérieur à 0"
+            "erreur": "L'id de l'utilisateur doit être supérieur à 0",
+            "champs manquant":manquant
         });
         return;
     }
     if(parseInt(req.body.id) <= 0){
         res.status(400);
         res.send({
-            message: "L'id de la tache doit être supérieur à 0"
+            "erreur": "L'id de la tache doit être supérieur à 0",
+            "champs manquant":manquant
         });
         return;
     }
